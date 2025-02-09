@@ -70,7 +70,7 @@ public class CartTest extends BaseTest {
         }
     }
 
-    @Test(description = "sc-5 ")
+    @Test(description = "sc-5 Place an order with an empty shopping cart")
     public void placeAnOrderWithAnEmptyShoppingCart(){
         loginPage.openPage(LOGIN_PAGE_URL);
         loginPage.login(USERNAME,PASSWORD);
