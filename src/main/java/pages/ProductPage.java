@@ -19,7 +19,6 @@ public class ProductPage extends HeaderPage{
         product.findElement(By.tagName("button")).click();
     }
 
-
     public void addProductsToCartPage(int addProductsToCartPage) {
         for (int i = 0; i < addProductsToCartPage; i++) {
             clickButtonAddToCartByIndex(i);
@@ -34,5 +33,4 @@ public class ProductPage extends HeaderPage{
             return false;
         }
     }
-
 }
