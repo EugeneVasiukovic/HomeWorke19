@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 
 public class CartTest extends BaseTest {
@@ -17,11 +18,12 @@ public class CartTest extends BaseTest {
         headerPage.navigateToCartPage();
         String[] expectedNames = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT};
         String[] expectedPrices = {SAUCE_LABS_BACKPACK_PRICE, SAUCE_LABS_BIKE_LIGHT_PRICE};
-        for (int i = 0; i < expectedNames.length; i++) {
+        IntStream.range(0, expectedNames.length).forEach(i -> {
             Assert.assertEquals(cartPage.getProductNames(i), expectedNames[i]);
             Assert.assertEquals(cartPage.getProductPrices(i), expectedPrices[i]);
-        }
+        });
     }
+
     @Test(description = "sc-2 Removing an item from the shopping cart and checking that it is missing")
     public void removeProductToCartTest() {
         loginPage.openPage(LOGIN_PAGE_URL);
@@ -32,11 +34,10 @@ public class CartTest extends BaseTest {
 
         List<WebElement> productNames = cartPage.ProductNames();
         String[] remainingProductNames = {SAUCE_LABS_BIKE_LIGHT, SAUCE_LABS_BOLT_T_SHIRT};
-
-        Assert.assertEquals(productNames.size(), 2);
-        for (int i = 0; i < remainingProductNames.length; i++) {
+        IntStream.range(0, remainingProductNames.length).forEach(i -> {
             Assert.assertEquals(productNames.get(i).getText(), remainingProductNames[i]);
-        }
+            Assert.assertEquals(productNames.size(), 2);
+        });
     }
 
     @Test(description = "sc-3 Updating the quantity of the purchased product in the basket")
@@ -63,9 +64,9 @@ public class CartTest extends BaseTest {
     }
 
     @Test(description = "sc-5 Place an order with an empty shopping cart")
-    public void placeAnOrderWithAnEmptyShoppingCart(){
+    public void placeAnOrderWithAnEmptyShoppingCart() {
         loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(USERNAME,PASSWORD);
+        loginPage.login(USERNAME, PASSWORD);
         headerPage.navigateToCartPage();
         cartPage.clickCheckoutButton();
         Assert.assertEquals(cartPage.getErrorMessage(), "Your cart is empty. Please add items to your cart before checking out.");
