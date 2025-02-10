@@ -35,7 +35,7 @@ public class CartPage extends HeaderPage{
         return priceProduct.getText().replace("$", "").trim();
     }
 
-    public String getProductQuantities(int number) {
+    public String retrieveProductQuantities(int number) {
         List<WebElement> quantityProducts = driver.findElements(QUANTITY_PRODUCT);
         return quantityProducts.get(number).getText();
     }

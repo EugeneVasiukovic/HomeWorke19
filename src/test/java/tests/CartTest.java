@@ -4,8 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-
 import java.util.List;
+
 
 public class CartTest extends BaseTest {
 
@@ -13,9 +13,7 @@ public class CartTest extends BaseTest {
     public void addProductToCartTest() {
         loginPage.openPage(LOGIN_PAGE_URL);
         loginPage.login(USERNAME, PASSWORD);
-        for (int i = 0; i < 2; i++) {
-            productPage.clickButtonAddToCartByIndex(i);
-        }
+        productPage.addProductsToCartPage(2);
         headerPage.navigateToCartPage();
         String[] expectedNames = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT};
         String[] expectedPrices = {SAUCE_LABS_BACKPACK_PRICE, SAUCE_LABS_BIKE_LIGHT_PRICE};
@@ -24,22 +22,18 @@ public class CartTest extends BaseTest {
             Assert.assertEquals(cartPage.getProductPrices(i), expectedPrices[i]);
         }
     }
-
     @Test(description = "sc-2 Removing an item from the shopping cart and checking that it is missing")
     public void removeProductToCartTest() {
         loginPage.openPage(LOGIN_PAGE_URL);
         loginPage.login(USERNAME, PASSWORD);
-        for (int i = 0; i < 3; i++) {
-            productPage.clickButtonAddToCartByIndex(i);
-        }
-
+        productPage.addProductsToCartPage(3);
         headerPage.navigateToCartPage();
         cartPage.clickRemoveButton(0);
 
         List<WebElement> productNames = cartPage.ProductNames();
-        Assert.assertEquals(productNames.size(), 2);
+        String[] remainingProductNames = {SAUCE_LABS_BIKE_LIGHT, SAUCE_LABS_BOLT_T_SHIRT};
 
-        String[] remainingProductNames = {SAUCE_LABS_BIKE_LIGHT, SAUCE_LABS_BOLT_T_SHIRT}; // Ожидаемые оставшиеся товары
+        Assert.assertEquals(productNames.size(), 2);
         for (int i = 0; i < remainingProductNames.length; i++) {
             Assert.assertEquals(productNames.get(i).getText(), remainingProductNames[i]);
         }
@@ -49,13 +43,11 @@ public class CartTest extends BaseTest {
     public void updateQuantityOfThePurchasedProduct() {
         loginPage.openPage(LOGIN_PAGE_URL);
         loginPage.login(USERNAME, PASSWORD);
-        for (int i = 0; i < 3; i++) {
-            productPage.clickButtonAddToCartByIndex(i);
-        }
+        productPage.addProductsToCartPage(3);
         headerPage.navigateToCartPage();
         cartPage.setProductQuantity(0, "2");
 
-        String updatedQuantity = cartPage.getProductQuantities(0);
+        String updatedQuantity = cartPage.retrieveProductQuantities(0);
         Assert.assertEquals(updatedQuantity, "2");
     }
 
@@ -63,7 +55,7 @@ public class CartTest extends BaseTest {
     public void addProductNonExistentToCart() {
         loginPage.openPage(LOGIN_PAGE_URL);
         loginPage.login(USERNAME, PASSWORD);
-        driver.get(PAGE_URL_NON_EXISTENT_PRODUCT);
+        productPage.openPage(PAGE_URL_NON_EXISTENT_PRODUCT);
         boolean isAddToCartButtonPresent = productPage.isAddToCartButtonPresent();
         if (isAddToCartButtonPresent) {
             Assert.fail("The 'Add to Cart' button should not be displayed for a non-existent product.");
@@ -77,6 +69,5 @@ public class CartTest extends BaseTest {
         headerPage.navigateToCartPage();
         cartPage.clickCheckoutButton();
         Assert.assertEquals(cartPage.getErrorMessage(), "Your cart is empty. Please add items to your cart before checking out.");
-
     }
 }

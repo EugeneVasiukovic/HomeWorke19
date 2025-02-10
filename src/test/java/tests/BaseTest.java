@@ -12,7 +12,7 @@ import pages.LoginPage;
 import pages.ProductPage;
 
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Handler;
+
 
 public class BaseTest implements IConstans, ITestConstans {
     WebDriver driver;
