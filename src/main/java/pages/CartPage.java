@@ -28,6 +28,7 @@ public class CartPage extends HeaderPage{
         return driver.findElements(NAME_PRODUCT);
     }
 
+
     public String getProductPrices(int number) {
         List<WebElement> priceProducts = driver.findElements(PRICE_PRODUCT);
         WebElement priceProduct = priceProducts.get(number);
@@ -54,3 +55,8 @@ public class CartPage extends HeaderPage{
         return driver.findElement(ERROR_MESSAGE).getText();
     }
 }
+
+
+
+
+
