@@ -9,7 +9,6 @@ public class LoginPage extends BasePage{
     public static final By LOGIN_BUTTON = By.id("login-button");
     public static final By ERROR_MESSAGE = By.xpath("//*[@data-test='error']");
 
-
     public LoginPage(WebDriver driver) {
         super(driver);
     }
@@ -22,6 +21,5 @@ public class LoginPage extends BasePage{
 
     public String getErrorMassegeTest(){
         return driver.findElement(ERROR_MESSAGE).getText();
-
     }
 }
