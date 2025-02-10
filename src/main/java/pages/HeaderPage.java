@@ -12,10 +12,4 @@ public class HeaderPage extends BasePage{
     public void navigateToCartPage(){
         driver.findElement(CART_PAGE).click();
     }
-
-
-
-
-
 }
-
