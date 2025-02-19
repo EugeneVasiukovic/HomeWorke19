@@ -38,3 +38,45 @@
    1. Перейти на страницу корзины, когда она пуста.
    Нажать кнопку "Checkout".
    - **Ожидаемый результат: Появляется сообщение об ошибке, заказ не оформляется**
+
+
+
+# Выполнение команд MVN
+
+## Команда: `mvn versions:use-latest-versions`
+[INFO] --- versions:2.18.0:display-dependency-updates (default-cli) @ SauceDemoHomeWork ---
+[INFO] No dependencies in Dependencies have newer versions.
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.534 s
+[INFO] Finished at: 2025-02-19T21:25:12+03:00
+[INFO] ------------------------------------------------------------------------
+
+## Команда: `mvn clean test`
+  [INFO]
+  [ERROR] Tests run: 7, Failures: 5, Errors: 0, Skipped: 0
+  [INFO]
+  [INFO] ------------------------------------------------------------------------
+  [INFO] BUILD FAILURE
+  [INFO] ------------------------------------------------------------------------
+  [INFO] Total time:  31.285 s
+  [INFO] Finished at: 2025-02-20T00:23:48+03:00
+  [INFO] ------------------------------------------------------------------------
+  [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.2:test (default-test) on project SauceDemoHomeWork
+
+## Команда:`mvn -DsuiteXmlFile="sauceDemoProductTest.xml" test`
+  [INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.709 s -- in TestSuite
+  [INFO]
+  [INFO] Results:
+  [INFO]
+  [INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+  [INFO]
+  [INFO] ------------------------------------------------------------------------
+  [INFO] BUILD SUCCESS
+  [INFO] ------------------------------------------------------------------------
+  [INFO] Total time:  7.254 s
+  [INFO] Finished at: 2025-02-20T00:26:01+03:00
+  [INFO] ------------------------------------------------------------------------
+
