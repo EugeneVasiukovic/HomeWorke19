@@ -3,12 +3,10 @@ package pages;
 import entity.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
+import waiters.WaiterLoaderPage;
 
 public class LoginPage extends BasePage{
+    WaiterLoaderPage waiterLoaderPage;
     public static final By USERNAME_INPUT = By.id("user-name");
     public static final By PASSWORD_INPUT = By.id("password");
     public static final By LOGIN_BUTTON = By.id("login-button");
@@ -35,9 +33,9 @@ public class LoginPage extends BasePage{
     public String getErrorMassegeTest(){
         return driver.findElement(ERROR_MESSAGE).getText();
     }
+
     public LoginPage waitForPageOpened() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));
+        waiterLoaderPage.waitForElementToBeVisible(LOGIN_BUTTON, 15);
         return this;
     }
 }

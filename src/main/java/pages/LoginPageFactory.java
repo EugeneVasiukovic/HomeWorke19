@@ -1,14 +1,13 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
+import waiters.WaiterLoaderPage;
 
 public class LoginPageFactory extends BasePage{
+    WaiterLoaderPage waiterLoaderPage;
 
     @FindBy(id = "user-name" )
     WebElement userNameInput;
@@ -50,8 +49,8 @@ public class LoginPageFactory extends BasePage{
         return deletesButton;
     }
 
-    public void waitForPageOpened() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.visibilityOf(loginButton));
+    public LoginPageFactory waitForPageOpened() {
+        waiterLoaderPage.waitForElementToBeVisible((By) loginButton, 15);
+        return this;
     }
 }
