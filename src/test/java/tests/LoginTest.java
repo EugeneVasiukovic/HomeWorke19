@@ -1,10 +1,7 @@
 package tests;
 
-
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 
 public class LoginTest extends Preconditions {
     public static final String EMPTY_USERNAME_ERROR = "Epic sadface: Username is required";

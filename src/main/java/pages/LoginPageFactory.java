@@ -28,8 +28,6 @@ public class LoginPageFactory extends BasePage{
     @FindBy(xpath = "//button[contains(.,'Delete')]")
     WebElement deletesButton;
 
-
-
     public LoginPageFactory(WebDriver driver) {
         super(driver);
     }

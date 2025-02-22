@@ -7,8 +7,6 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.stream.IntStream;
 
-
-
 public class CartTest extends Preconditions {
 
     @Test(description = "SC-1 Adding an item to the shopping cart and checking for compliance with the name and price of the added item")
