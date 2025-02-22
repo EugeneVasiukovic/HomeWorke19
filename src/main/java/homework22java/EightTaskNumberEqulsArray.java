@@ -12,7 +12,6 @@ public class EightTaskNumberEqulsArray {
                 return false;
             }
         }
-
         return true;
     }
 
