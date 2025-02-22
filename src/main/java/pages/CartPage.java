@@ -14,6 +14,7 @@ public class CartPage extends HeaderPage{
     public static final By CHECKOUT_BUTTON = By.id("checkout");
     public static final By ERROR_MESSAGE = By.className("title");
 
+
     public CartPage(WebDriver driver) {
         super(driver);
     }

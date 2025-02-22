@@ -12,31 +12,64 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <selenium.version>4.28.1</selenium.version>
+        <testng.version>7.10.2</testng.version>
+        <assertj.verseon>3.27.3</assertj.verseon>
+        <webdrivermanager.version>5.9.1</webdrivermanager.version>
+        <hamcrest.version>3.0</hamcrest.version>
+        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+        <lombok.version>1.18.36</lombok.version>
+        <suiteXmlFile>sauceDemoAllSuites.xml</suiteXmlFile>
     </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/${suiteXmlFile}</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.28.1</version>
+            <version>${selenium.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.10.2</version>
+            <version>${testng.version}</version>
         </dependency>
         <!--         https://mvnrepository.com/artifact/org.assertj/assertj-core -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.27.3</version>
+            <version>${assertj.verseon}</version>
         </dependency>
         <!--         https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.9.1</version>
+            <version>${webdrivermanager.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>${hamcrest.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
         </dependency>
     </dependencies>
 </project>
