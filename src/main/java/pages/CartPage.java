@@ -6,7 +6,10 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class CartPage extends HeaderPage{
+/**
+ * This class represents the cart page and provides methods to interact with it.
+ */
+public class CartPage extends HeaderPage {
     public static final By NAME_PRODUCT = By.className("inventory_item_name");
     public static final By PRICE_PRODUCT = By.className("inventory_item_price");
     public static final By QUANTITY_PRODUCT = By.className("cart_quantity");
@@ -14,43 +17,93 @@ public class CartPage extends HeaderPage{
     public static final By CHECKOUT_BUTTON = By.id("checkout");
     public static final By ERROR_MESSAGE = By.className("title");
 
+    /**
+     * Constructor for CartPage.
+     *
+     * @param driver the WebDriver instance
+     */
     public CartPage(WebDriver driver) {
         super(driver);
     }
 
+    /**
+     * Gets the name of the product at the specified index.
+     *
+     * @param number the index of the product
+     * @return the name of the product
+     */
     public String getProductNames(int number) {
         List<WebElement> nameProducts = driver.findElements(NAME_PRODUCT);
         WebElement nameProduct = nameProducts.get(number);
         return nameProduct.getText();
     }
 
+    /**
+     * Gets a list of all product name elements.
+     *
+     * @return a list of WebElement representing product names
+     */
     public List<WebElement> ProductNames() {
         return driver.findElements(NAME_PRODUCT);
     }
 
-
+    /**
+     * Gets the price of the product at the specified index.
+     *
+     * @param number the index of the product
+     * @return the price of the product as a String
+     */
     public String getProductPrices(int number) {
         List<WebElement> priceProducts = driver.findElements(PRICE_PRODUCT);
         WebElement priceProduct = priceProducts.get(number);
         return priceProduct.getText().replace("$", "").trim();
     }
 
+    /**
+     * Retrieves the quantity of the product at the specified index.
+     *
+     * @param number the index of the product
+     * @return the quantity of the product as a String
+     */
     public String retrieveProductQuantities(int number) {
         List<WebElement> quantityProducts = driver.findElements(QUANTITY_PRODUCT);
         return quantityProducts.get(number).getText();
     }
-    public void  setProductQuantity(int number,String quantity){
+
+    /**
+     * Sets the quantity of the product at the specified index.
+     *
+     * @param number the index of the product
+     * @param quantity the quantity to set
+     */
+    public void setProductQuantity(int number, String quantity) {
         List<WebElement> quantityProducts = driver.findElements(QUANTITY_PRODUCT);
         WebElement quantityProduct = quantityProducts.get(number);
         quantityProduct.sendKeys(quantity);
     }
+
+    /**
+     * Clicks the remove button for the product at the specified index.
+     *
+     * @param number the index of the product
+     */
     public void clickRemoveButton(int number) {
         List<WebElement> removeButtons = driver.findElements(REMOVE_BUTTON);
         removeButtons.get(number).click();
     }
-    public void clickCheckoutButton(){
+
+    /**
+     * Clicks the checkout button.
+     */
+    public void clickCheckoutButton() {
         driver.findElement(CHECKOUT_BUTTON).click();
     }
+
+    /**
+     * Gets the error message displayed on the cart page.
+     *
+     * @return the error message as a String
+     */
     public String getErrorMessage() {
         return driver.findElement(ERROR_MESSAGE).getText();
     }

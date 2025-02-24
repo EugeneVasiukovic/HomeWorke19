@@ -32,8 +32,9 @@ public class CartTest extends Preconditions {
         loginPage
                 .login(userSuccess)
                 .addProductsToCartPage(3);
-        headerPage.navigateToCartPage();
-        cartPage.clickRemoveButton(0);
+        headerPage
+                .navigateToCartPage()
+                .clickRemoveButton(0);
 
         List<WebElement> productNames = cartPage.ProductNames();
         String[] remainingProductNames = {SAUCE_LABS_BIKE_LIGHT, SAUCE_LABS_BOLT_T_SHIRT};
@@ -50,8 +51,9 @@ public class CartTest extends Preconditions {
         loginPage
                 .login(userSuccess)
                 .addProductsToCartPage(3);
-        headerPage.navigateToCartPage();
-        cartPage.setProductQuantity(0, "2");
+        headerPage
+                .navigateToCartPage()
+                .setProductQuantity(0, "2");
 
         String updatedQuantity = cartPage.retrieveProductQuantities(0);
         Assert.assertEquals(updatedQuantity, "2");
@@ -74,8 +76,9 @@ public class CartTest extends Preconditions {
     public void placeAnOrderWithAnEmptyShoppingCart() {
         loginPage.openPage(LOGIN_PAGE_URL);
         loginPage.login(userSuccess);
-        headerPage.navigateToCartPage();
-        cartPage.clickCheckoutButton();
+        headerPage
+                .navigateToCartPage()
+                .clickCheckoutButton();
         Assert.assertEquals(cartPage.getErrorMessage(), "Your cart is empty. Please add items to your cart before checking out.");
     }
 }

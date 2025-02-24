@@ -20,12 +20,12 @@ public class Preconditions extends BaseTest {
             .password("")
             .build();
 
-    public static User userWithEmptyFilds = User.builder()
+    public static User userWithEmptyFields = User.builder()
             .username("")
             .password("")
             .build();
 
-    public static User userWithEmptyIncorect = User.builder()
+    public static User userWithEmptyIncorrect = User.builder()
             .username("sdfdsf")
             .password("dfdfd")
             .build();
