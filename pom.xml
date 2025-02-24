@@ -18,21 +18,22 @@
         <assertj-core.version>3.27.3</assertj-core.version>
         <webdrivermanager.version>5.9.3</webdrivermanager.version>
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+        <lombok.version>1.18.36</lombok.version>
         <suiteXmlFile>sauceDemo.xml</suiteXmlFile>
     </properties>
     <build>
         <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>${maven-surefire-plugin.version}</version>
-            <configuration>
-                <suiteXmlFiles>
-                    <suiteXmlFile>src/test/resources/${suiteXmlFile}</suiteXmlFile>
-                </suiteXmlFiles>
-            </configuration>
-        </plugin>
-    </plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/${suiteXmlFile}</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
@@ -65,6 +66,16 @@
             <artifactId>hamcrest</artifactId>
             <version>${hamcrest.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>${hamcrest.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
     </dependencies>
 </project>

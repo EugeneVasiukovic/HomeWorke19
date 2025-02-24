@@ -1,4 +1,4 @@
-package tests;
+package core;
 
 public interface ITestConstans {
     String USERNAME = "standard_user";
