@@ -10,6 +10,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import pages.*;
+import steps.CartSteps;
+import steps.LoginSteps;
+import steps.ProductSteps;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,6 +24,9 @@ public class BaseTest implements IConstans, ITestConstans {
     CartPage cartPage;
     HeaderPage headerPage;
     LoginPageFactory loginPageFactory;
+    ProductSteps productSteps;
+    LoginSteps loginSteps;
+    CartSteps cartSteps;
 
     @BeforeMethod
     public void initTest(){
@@ -37,6 +43,9 @@ public class BaseTest implements IConstans, ITestConstans {
         cartPage = new CartPage(driver);
         headerPage = new HeaderPage(driver);
         loginPageFactory = new LoginPageFactory(driver);
+        productSteps = new ProductSteps(driver);
+        loginSteps = new LoginSteps(driver);
+        cartSteps = new CartSteps(driver);
     }
 
     @AfterMethod
