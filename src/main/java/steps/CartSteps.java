@@ -1,30 +1,24 @@
 package steps;
 
-import entity.User;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
+import pages.CartPage;
 import pages.HeaderPage;
 import pages.LoginPage;
-
-import static constans.IConstans.LOGIN_PAGE_URL;
-
 
 public class CartSteps {
     private LoginPage loginPage;
     private HeaderPage headerPage;
+    private CartPage cartPage;
 
     public CartSteps(WebDriver driver) {
-        loginPage =new LoginPage(driver);
+        loginPage = new LoginPage(driver);
         headerPage = new HeaderPage(driver);
+        cartPage = new CartPage(driver);
     }
 
     @Step("Login, Add Product to Cart, and Remove Product")
-    public CartSteps loginAndAddProductToCartAndDeleteProduct(User user, int addProduct, int deleteProduct) {
-        loginPage
-                .openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(user)
-                .addProductsToCartPage(addProduct);
+    public CartSteps navigateToCartAndDeleteProduct(int deleteProduct) {
         headerPage
                 .navigateToCartPage()
                 .clickRemoveButton(deleteProduct);
@@ -32,46 +26,30 @@ public class CartSteps {
     }
 
     @Step("Login, Add Product to Cart, and Check Product")
-    public CartSteps loginAndAddProductCheckToCart(User user, int addProduct) {
-        loginPage
-                .openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(user)
-                .addProductsToCartPage(addProduct);
+    public CartSteps navigateToCartPage() {
         headerPage
                 .navigateToCartPage();
         return this;
     }
 
     @Step("Login, Add Product to Cart, and update Quantity")
-    public CartSteps loginAndAddProductUpdateQuantity(User user, int addProduct) {
-        loginPage
-                .openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(user)
-                .addProductsToCartPage(addProduct);
+    public CartSteps UpdateQuantity(int product, String addQuantity) {
         headerPage
                 .navigateToCartPage()
-                .setProductQuantity(0, "2");
+                .setProductQuantity(product, addQuantity);
         return this;
     }
 
     @Step("Login, Add Product to Cart, Product Non Existent")
-    public CartSteps loginAndAddProductNonExistent(User user, String url) {
+    public CartSteps addProductNonExistent(String url) {
         loginPage
-                .openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(user)
                 .openPage(url);
         return this;
     }
 
     @Step("Place an order with an empty shopping cart")
-    public CartSteps placeAnOrderWithAnEmptyShoppingCart(User user) {
-        loginPage.openPage(LOGIN_PAGE_URL);
-        loginPage.login(user);
-        headerPage
-                .navigateToCartPage()
+    public CartSteps placeAnOrderWithAnEmptyShoppingCart() {
+        cartPage
                 .clickCheckoutButton();
         return this;
     }
