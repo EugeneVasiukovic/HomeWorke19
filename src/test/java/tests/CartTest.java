@@ -39,7 +39,7 @@ public class CartTest extends Preconditions {
     public void updateQuantityOfThePurchasedProduct() {
         loginSteps.loginAndWaitForPageOpened(userSuccess);
         productSteps.addProductToCart(3);
-        cartSteps.UpdateQuantity(0,"2");
+        cartSteps.updateQuantity(0,"2");
         String updatedQuantity = cartPage.retrieveProductQuantities(0);
         Assert.assertEquals(updatedQuantity, "2");
     }
