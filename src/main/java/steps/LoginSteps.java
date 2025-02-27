@@ -14,7 +14,7 @@ public class LoginSteps {
     }
 
     @Step("Login and wait for page loaded")
-    public LoginSteps loginAndWaitForPageOpened(String username, String password){
+    public LoginSteps loginAndPageOpened(String username, String password){
         loginPage.openPage(IConstans.LOGIN_PAGE_URL);
         loginPage
                 .login(username,password);
@@ -22,7 +22,7 @@ public class LoginSteps {
     }
 
     @Step("Login and wait for page loaded")
-    public LoginSteps loginAndWaitForPageOpened(User user){
+    public LoginSteps loginAndPageOpened(User user){
         loginPage.openPage(IConstans.LOGIN_PAGE_URL);
         loginPage
                 .login(user);

@@ -10,31 +10,31 @@ public class LoginTest extends Preconditions {
 
     @Test(description = "sc-8 Checking login with an empty username")
     public void loginWithEmptyUsernameTest(){
-        loginSteps.loginAndWaitForPageOpened(userWithEmptyUsername);
+        loginSteps.loginAndPageOpened(userWithEmptyUsername);
         Assert.assertEquals(loginPage.getErrorMassegeTest(), EMPTY_USERNAME_ERROR);
     }
 
     @Test(description = "sc-9 Checking successful login")
     public void loginSuccessTest() {
-        loginSteps.loginAndWaitForPageOpened(userSuccess);
+        loginSteps.loginAndPageOpened(userSuccess);
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
     }
 
     @Test(description = "sc-10 Checking login with an empty password")
     public void loginWithEmptyPasswordTest() {
-        loginSteps.loginAndWaitForPageOpened(userWithEmptyPassword);
+        loginSteps.loginAndPageOpened(userWithEmptyPassword);
         Assert.assertEquals(loginPage.getErrorMassegeTest(), EMPTY_DATA_IN_FIELD_PASSWORD_ERROR);
     }
 
     @Test(description = "sc-11 Checking login with both fields empty")
     public void loginWithEmptyFieldsTest() {
-        loginSteps.loginAndWaitForPageOpened(userWithEmptyFields);
+        loginSteps.loginAndPageOpened(userWithEmptyFields);
         Assert.assertEquals(loginPage.getErrorMassegeTest(), EMPTY_USERNAME_ERROR);
     }
 
     @Test(description = "sc-12 Checking login with incorrect username and password")
     public void loginWithIncorrectFieldsTest() {
-        loginSteps.loginAndWaitForPageOpened(userWithEmptyIncorrect);
+        loginSteps.loginAndPageOpened(userWithEmptyIncorrect);
         Assert.assertEquals(loginPage.getErrorMassegeTest(), INCORRECT_DATA_IN_FIELDS);
     }
 }

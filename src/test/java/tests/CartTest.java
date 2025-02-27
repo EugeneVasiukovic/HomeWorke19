@@ -11,7 +11,7 @@ public class CartTest extends Preconditions {
 
     @Test(description = "SC-1 Adding an item to the shopping cart and checking for compliance with the name and price of the added item")
     public void addProductToCartTest() {
-        loginSteps.loginAndWaitForPageOpened(userSuccess);
+        loginSteps.loginAndPageOpened(userSuccess);
         productSteps.addProductToCart(2);
         cartSteps.navigateToCartPage();
         String[] expectedNames = {SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT};
@@ -24,7 +24,7 @@ public class CartTest extends Preconditions {
 
     @Test(description = "sc-2 Removing an item from the shopping cart and checking that it is missing")
     public void removeProductToCartTest() {
-        loginSteps.loginAndWaitForPageOpened(userSuccess);
+        loginSteps.loginAndPageOpened(userSuccess);
         productSteps.addProductToCart(3);
         cartSteps.navigateToCartAndDeleteProduct(0);
         List<WebElement> productNames = cartPage.ProductNames();
@@ -37,7 +37,7 @@ public class CartTest extends Preconditions {
 
     @Test(enabled = false, description = "sc-3 Updating the quantity of the purchased product in the basket")
     public void updateQuantityOfThePurchasedProduct() {
-        loginSteps.loginAndWaitForPageOpened(userSuccess);
+        loginSteps.loginAndPageOpened(userSuccess);
         productSteps.addProductToCart(3);
         cartSteps.updateQuantity(0,"2");
         String updatedQuantity = cartPage.retrieveProductQuantities(0);
@@ -46,7 +46,7 @@ public class CartTest extends Preconditions {
 
     @Test(enabled = false, description = "sc-4 When you go to the product page with an ID that does not exist, there should be no 'Add to Cart' button.")
     public void addProductNonExistentToCart() {
-        loginSteps.loginAndWaitForPageOpened(userSuccess);
+        loginSteps.loginAndPageOpened(userSuccess);
         cartSteps.addProductNonExistent(PAGE_URL_NON_EXISTENT_PRODUCT);
         boolean isAddToCartButtonPresent = productPage.isAddToCartButtonPresent();
         if (isAddToCartButtonPresent) {
@@ -56,7 +56,7 @@ public class CartTest extends Preconditions {
 
     @Test(enabled = false, description = "sc-5 Place an order with an empty shopping cart")
     public void placeAnOrderWithAnEmptyShoppingCart() {
-        loginSteps.loginAndWaitForPageOpened(userSuccess);
+        loginSteps.loginAndPageOpened(userSuccess);
         cartSteps
                 .navigateToCartPage()
                 .placeAnOrderWithAnEmptyShoppingCart();
