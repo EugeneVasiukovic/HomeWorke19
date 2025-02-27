@@ -33,7 +33,7 @@ public class CartSteps {
     }
 
     @Step("Login, Add Product to Cart, and update Quantity")
-    public CartSteps UpdateQuantity(int product, String addQuantity) {
+    public CartSteps updateQuantity(int product, String addQuantity) {
         headerPage
                 .navigateToCartPage()
                 .setProductQuantity(product, addQuantity);
