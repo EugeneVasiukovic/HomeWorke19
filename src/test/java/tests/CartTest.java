@@ -1,5 +1,6 @@
 package tests;
 
+
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -35,7 +36,7 @@ public class CartTest extends Preconditions {
         });
     }
 
-    @Test(enabled = false, description = "sc-3 Updating the quantity of the purchased product in the basket")
+    @Test(description = "sc-3 Updating the quantity of the purchased product in the basket")
     public void updateQuantityOfThePurchasedProduct() {
         loginSteps.loginAndPageOpened(userSuccess);
         productSteps.addProductToCart(3);
