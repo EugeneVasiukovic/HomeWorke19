@@ -1,5 +1,6 @@
 package pages;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,7 @@ import java.util.List;
 /**
  * This class represents the cart page and provides methods to interact with it.
  */
+@Log4j2
 public class CartPage extends HeaderPage {
     public static final By NAME_PRODUCT = By.className("inventory_item_name");
     public static final By PRICE_PRODUCT = By.className("inventory_item_price");
@@ -33,6 +35,7 @@ public class CartPage extends HeaderPage {
      * @return the name of the product
      */
     public String getProductNames(int number) {
+        log.info("Get product number {}", number);
         List<WebElement> nameProducts = driver.findElements(NAME_PRODUCT);
         WebElement nameProduct = nameProducts.get(number);
         return nameProduct.getText();
@@ -56,7 +59,9 @@ public class CartPage extends HeaderPage {
     public String getProductPrices(int number) {
         List<WebElement> priceProducts = driver.findElements(PRICE_PRODUCT);
         WebElement priceProduct = priceProducts.get(number);
-        return priceProduct.getText().replace("$", "").trim();
+        String priceText = priceProduct.getText().replace("$", "").trim();
+        log.info("get price product {}: {}", number, priceText);
+        return priceText;
     }
 
     /**
@@ -67,6 +72,7 @@ public class CartPage extends HeaderPage {
      */
     public String retrieveProductQuantities(int number) {
         List<WebElement> quantityProducts = driver.findElements(QUANTITY_PRODUCT);
+        log.info("Get product quantity {}", quantityProducts);
         return quantityProducts.get(number).getText();
     }
 
@@ -80,6 +86,7 @@ public class CartPage extends HeaderPage {
         List<WebElement> quantityProducts = driver.findElements(QUANTITY_PRODUCT);
         WebElement quantityProduct = quantityProducts.get(number);
         quantityProduct.sendKeys(quantity);
+        log.info("Set product quantity {}", quantityProducts);
     }
 
     /**
@@ -89,7 +96,9 @@ public class CartPage extends HeaderPage {
      */
     public void clickRemoveButton(int number) {
         List<WebElement> removeButtons = driver.findElements(REMOVE_BUTTON);
-        removeButtons.get(number).click();
+        WebElement button = removeButtons.get(number);
+        button.click();
+        log.info("Clicked remove button at index {}", number);
     }
 
     /**
