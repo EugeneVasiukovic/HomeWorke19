@@ -35,9 +35,9 @@ public class CartPage extends HeaderPage {
      * @return the name of the product
      */
     public String getProductNames(int number) {
-        log.info("Get product number {}", number);
         List<WebElement> nameProducts = driver.findElements(NAME_PRODUCT);
         WebElement nameProduct = nameProducts.get(number);
+        log.info("Get product index {}: {}", number, nameProduct.getText());
         return nameProduct.getText();
     }
 
