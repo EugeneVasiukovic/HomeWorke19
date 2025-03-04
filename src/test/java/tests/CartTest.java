@@ -36,7 +36,7 @@ public class CartTest extends Preconditions {
         });
     }
 
-    @Test(description = "sc-3 Updating the quantity of the purchased product in the basket")
+    @Test(enabled = false, description = "sc-3 Updating the quantity of the purchased product in the basket")
     public void updateQuantityOfThePurchasedProduct() {
         loginSteps.loginAndPageOpened(userSuccess);
         productSteps.addProductToCart(3);

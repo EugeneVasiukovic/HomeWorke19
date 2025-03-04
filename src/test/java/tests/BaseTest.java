@@ -30,7 +30,7 @@ public class BaseTest implements IConstans, ITestConstans {
     CartSteps cartSteps;
 
     @BeforeMethod
-    public void initTest(ITestContext iTestContext){
+    public void initTest(ITestContext iTestContext) {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();

@@ -1,5 +1,6 @@
 package pages;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,7 @@ import java.util.NoSuchElementException;
 /**
  * This class represents the product page and provides methods to interact with it.
  */
+@Log4j2
 public class ProductPage extends HeaderPage {
     private static final By PRODUCT_LIST = By.className("inventory_item");
     private static final By ADD_TO_CART_BUTTON = By.className("btn_primary");
@@ -34,6 +36,7 @@ public class ProductPage extends HeaderPage {
      */
     public ProductPage addProductToCart(String... productNames) {
         for (String productName : productNames) {
+            log.info("Adding product to cart: {}", productName);
             driver.findElement(By.xpath(String.format(ADD_PRODUCT_TO_CART_BUTTON, productName))).click();
         }
         return this;
@@ -46,7 +49,9 @@ public class ProductPage extends HeaderPage {
      * @return true if the button is displayed, false otherwise
      */
     public boolean isAddToCartButtonDisplayed(String productName) {
-        return driver.findElement(By.xpath(String.format(ADD_PRODUCT_TO_CART_BUTTON, productName))).isDisplayed();
+        boolean isDisplayed = driver.findElement(By.xpath(String.format(ADD_PRODUCT_TO_CART_BUTTON, productName))).isDisplayed();
+        log.info("Is 'Add to Cart' button displayed for product {}: {}", productName, isDisplayed);
+        return isDisplayed;
     }
 
     /**
@@ -56,7 +61,9 @@ public class ProductPage extends HeaderPage {
      * @return true if the button is displayed, false otherwise
      */
     public boolean isRemoveToCartButtonDisplayed(String productName) {
-        return driver.findElement(By.xpath(String.format(REMOVE_PRODUCT_FROM_CART_BUTTON, productName))).isDisplayed();
+        boolean isDisplayed = driver.findElement(By.xpath(String.format(REMOVE_PRODUCT_FROM_CART_BUTTON, productName))).isDisplayed();
+        log.info("Is 'Remove from Cart' button displayed for product {}: {}", productName, isDisplayed);
+        return isDisplayed;
     }
 
     /**
@@ -66,7 +73,9 @@ public class ProductPage extends HeaderPage {
      * @return the price of the product as a String
      */
     public String getProductPrice(String productName) {
-        return driver.findElement(By.xpath(String.format(PRODUCT_PRICE, productName))).getText();
+        String price = driver.findElement(By.xpath(String.format(PRODUCT_PRICE, productName))).getText();
+        log.info("Price of product {}: {}", productName, price);
+        return price;
     }
 
     /**
@@ -77,6 +86,7 @@ public class ProductPage extends HeaderPage {
     public void clickButtonAddToCartByIndex(int number) {
         List<WebElement> products = driver.findElements(PRODUCT_LIST);
         WebElement product = products.get(number);
+        log.info("Clicking 'Add to Cart' button for product at index {}", number);
         product.findElement(ADD_TO_CART_BUTTON).click();
     }
 
@@ -87,6 +97,7 @@ public class ProductPage extends HeaderPage {
      */
     public void addProductsToCartPage(int addProductsToCartPage) {
         for (int i = 0; i < addProductsToCartPage; i++) {
+            log.info("Adding product at index {} to cart", i);
             clickButtonAddToCartByIndex(i);
         }
     }
