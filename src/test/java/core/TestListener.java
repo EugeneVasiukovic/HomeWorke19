@@ -1,6 +1,7 @@
 package core;
 
 import io.qameta.allure.Attachment;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -10,60 +11,66 @@ import org.testng.ITestResult;
 import org.openqa.selenium.WebDriver;
 import java.util.concurrent.TimeUnit;
 
-
+@Log4j2
 public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        System.out.println(String.format("======================================== STARTING TEST %s ========================================", iTestResult.getName()));
+        log.info("======================================== STARTING TEST {} ========================================%n", iTestResult.getName());
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        System.out.println(String.format("======================================== FINISHED TEST %s Duration: %ss ========================================", iTestResult.getName(),
-                getExecutionTime(iTestResult)));
+        log.info("======================================== FINISHED TEST {} Duration: {}s ========================================%n", iTestResult.getName(), getExecutionTime(iTestResult));
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        System.out.println(String.format("======================================== FAILED TEST %s Duration: %ss ========================================", iTestResult.getName(),
-                getExecutionTime(iTestResult)));
-        takeScreenshot(iTestResult);
+        log.info("======================================== FAILED TEST {} Duration: {}s ========================================%n", iTestResult.getName(), getExecutionTime(iTestResult));
+        ITestContext context = iTestResult.getTestContext();
+        WebDriver driver = (WebDriver) context.getAttribute("driver");
+        takeScreenshot(driver);
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        System.out.println(String.format("======================================== SKIPPING TEST %s ========================================", iTestResult.getName()));
-        takeScreenshot(iTestResult);
+        log.info("======================================== SKIPPING TEST {} ========================================%n", iTestResult.getName());
+        ITestContext context = iTestResult.getTestContext();
+        WebDriver driver = (WebDriver) context.getAttribute("driver");
+        takeScreenshot(driver);
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-
+        log.info("======================================== BROKEN TEST {} Duration: {}s ========================================%n", iTestResult.getName(), getExecutionTime(iTestResult));
+        ITestContext context = iTestResult.getTestContext();
+        WebDriver driver = (WebDriver) context.getAttribute("driver");
+        takeScreenshot(driver);
     }
+
 
     @Override
     public void onStart(ITestContext iTestContext) {
-
+        log.info("======================================== STARTING TEST CONTEXT ========================================%n");
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-
+        log.info("======================================== FINISHING TEST CONTEXT ========================================%n");
     }
 
     @Attachment(value = "Last screen state", type = "image/jpg")
-    private byte[] takeScreenshot(ITestResult iTestResult) {
-        ITestContext context = iTestResult.getTestContext();
+    private byte[] takeScreenshot(WebDriver driver) {
         try {
-            WebDriver driver = (WebDriver) context.getAttribute("driver");
-            if(driver != null) {
-                return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+            if (driver != null) {
+                return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             } else {
-                return new byte[] {};
+                log.warn("WebDriver instance is null. Cannot take screenshot.");
+                return new byte[]{};
             }
         } catch (NoSuchSessionException | IllegalStateException ex) {
-            return new byte[] {};
+            log.error("Exception while taking screenshot: ", ex);
+            return new byte[]{};
         }
     }
 

@@ -1,6 +1,7 @@
 package pages;
 
 import entity.User;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import waiters.WaiterLoaderPage;
@@ -8,7 +9,8 @@ import waiters.WaiterLoaderPage;
 /**
  * This class represents the login page and provides methods to interact with it.
  */
-public class LoginPage extends BasePage{
+@Log4j2
+public class LoginPage extends BasePage {
     WaiterLoaderPage waiterLoaderPage;
     public static final By USERNAME_INPUT = By.id("user-name");
     public static final By PASSWORD_INPUT = By.id("password");
@@ -30,7 +32,8 @@ public class LoginPage extends BasePage{
      * @param user the User object containing username and password
      * @return a new instance of ProductPage
      */
-    public ProductPage login(User user){
+    public ProductPage login(User user) {
+        log.info("Logging in with user: {}", user.getUsername());
         driver.findElement(USERNAME_INPUT).sendKeys(user.getUsername());
         driver.findElement(PASSWORD_INPUT).sendKeys(user.getPassword());
         driver.findElement(LOGIN_BUTTON).click();
@@ -44,7 +47,8 @@ public class LoginPage extends BasePage{
      * @param password the password as a String
      * @return a new instance of ProductPage
      */
-    public ProductPage login(String username, String password){
+    public ProductPage login(String username, String password) {
+        log.info("Logging in with username: {}", username);
         driver.findElement(USERNAME_INPUT).sendKeys(username);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
@@ -56,8 +60,10 @@ public class LoginPage extends BasePage{
      *
      * @return the error message as a String
      */
-    public String getErrorMassegeTest(){
-        return driver.findElement(ERROR_MESSAGE).getText();
+    public String getErrorMassegeTest() {
+        String errorMessage = driver.findElement(ERROR_MESSAGE).getText();
+        log.error("Login error message: {}", errorMessage);
+        return errorMessage;
     }
 
     /**
@@ -66,6 +72,7 @@ public class LoginPage extends BasePage{
      * @return the current instance of LoginPage
      */
     public LoginPage waitForPageOpened() {
+        log.info("Waiting for login page to be fully loaded");
         waiterLoaderPage.waitForElementToBeVisible(LOGIN_BUTTON, 15);
         return this;
     }
