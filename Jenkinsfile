@@ -16,13 +16,13 @@ pipeline {
       stage('Testing') {
          steps {
             // Get some code from a GitHub repository
-            git branch: "${params.BRANCH}", url: 'https://github.com/EugeneVasiukovic/HomeWorke19.git'
+            git branch: "${params.BRANCH}", url: 'https://github.com/qa29onl/SauceDemoTestProject.git'
 
             // Run Maven on a Unix agent.
 //             sh "mvn clean test"
 
             // To run Maven on a Windows agent, use
-            bat "mvn clean -Dtest=LoginTest test"
+            bat "mvn clean test -f pom.xml"
          }
 
          post {
