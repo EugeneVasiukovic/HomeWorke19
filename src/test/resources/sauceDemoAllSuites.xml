@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="SauceDemo Test Suite" parallel="tests" thread-count="2">
-    <suite-files>
-        <suite-file path="sauceDemoCartsTest.xml" />
-        <suite-file path="sauceDemoProductTest.xml" />
-        <suite-file path="sauceDemoLoginTest.xml" />
-    </suite-files>
+    <test name="SauceDemoAllTest">
+        <classes>
+            <class name="tests.CartTest"/>
+            <class name="tests.ProductTest"/>
+            <class name="tests.LoginTest"/>
+        </classes>
+    </test>
 </suite>
